@@ -24,7 +24,7 @@ val p = project {
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.9.9")
+        compile("junit:junit:4.12")
     }
 
     assemble {
