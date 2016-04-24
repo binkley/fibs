@@ -40,7 +40,11 @@ fun main(args: Array<String>) {
     var n: Int
     when (args.size) {
         1 -> {
-            n = args[0].toInt()
+            n = try {
+                args[0].toInt()
+            } catch(e: NumberFormatException) {
+                return usage()
+            }
             if (0 > n) {
                 return usage()
             }
