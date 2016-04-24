@@ -27,26 +27,31 @@ private operator fun IntArray.times(that: IntArray): IntArray {
             row(this, 1) dot col(that, 1))
 }
 
+private fun usage() {
+    err.println("Usage: X n")
+    exit(2)
+}
+
+private fun IntArray.show() {
+    out.println(Arrays.toString(this))
+}
+
 fun main(args: Array<String>) {
     var n: Int
     when (args.size) {
-        1 -> n = args[0].toInt()
-        else -> {
-            err.println("Usage: X n")
-            exit(2)
-            n = -1 // TODO: Fake
+        1 -> {
+            n = args[0].toInt()
+            if (0 > n) {
+                return usage()
+            }
         }
+        else -> return usage()
     }
 
-    if (n < 0) {
-        err.println("Usage: X n")
-        exit(2)
-    }
-
-    out.println(Arrays.toString(fib0))
+    fib0.show()
     var fibn: IntArray = fib0
     while (n-- > 0) {
         fibn *= fib0
-        out.println(Arrays.toString(fibn))
+        fibn.show()
     }
 }
