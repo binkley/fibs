@@ -16,15 +16,15 @@ private fun col(a: IntArray, j: Int): IntArray {
     return intArrayOf(a[0 + j], a[2 + j])
 }
 
-private fun dot(a: IntArray, b: IntArray): Int {
-    return a[0] * b[0] + a[1] * b[1]
+private infix fun IntArray.dot(that: IntArray): Int {
+    return this[0] * that[0] + this[1] * that[1]
 }
 
-private fun mult(a: IntArray, b: IntArray): IntArray {
-    return intArrayOf(dot(row(a, 0), col(b, 0)),
-            dot(row(a, 0), col(b, 1)),
-            dot(row(a, 1), col(b, 0)),
-            dot(row(a, 1), col(b, 1)))
+private operator fun IntArray.times(that: IntArray): IntArray {
+    return intArrayOf(row(this, 0) dot col(that, 0),
+            row(this, 0) dot col(that, 1),
+            row(this, 1) dot col(that, 0),
+            row(this, 1) dot col(that, 1))
 }
 
 fun main(args: Array<String>) {
@@ -46,7 +46,7 @@ fun main(args: Array<String>) {
     out.println(Arrays.toString(fib0))
     var fibn: IntArray = fib0
     while (n-- > 0) {
-        fibn = mult(fibn, fib0)
+        fibn *= fib0
         out.println(Arrays.toString(fibn))
     }
 }
