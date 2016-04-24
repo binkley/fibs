@@ -19,10 +19,6 @@ val p = project {
         path("src/test/kotlin")
     }
 
-    dependencies {
-//        compile("com.beust:jcommander:1.48")
-    }
-
     dependenciesTest {
         compile("junit:junit:4.12")
     }
