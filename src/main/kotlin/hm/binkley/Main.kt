@@ -28,7 +28,7 @@ private operator fun IntArray.times(that: IntArray): IntArray {
 }
 
 private fun usage() {
-    err.println("Usage: X n")
+    err.println("Usage: fibs <n>")
     exit(2)
 }
 
@@ -36,22 +36,17 @@ private fun IntArray.show() {
     out.println(Arrays.toString(this))
 }
 
-fun main(args: Array<String>) {
-    var n: Int
-    when (args.size) {
-        1 -> {
-            n = try {
-                args[0].toInt()
-            } catch(e: NumberFormatException) {
-                return usage()
-            }
-            if (0 > n) {
-                return usage()
-            }
-        }
-        else -> return usage()
-    }
+private fun n(args: Array<String>): Int? {
+    return if (1 == args.size) try {
+        val n = args[0].toInt()
+        if (0 > n) null else n
+    } catch (e: NumberFormatException) {
+        null
+    } else null
+}
 
+fun main(args: Array<String>) {
+    var n: Int = n(args) ?: return usage()
     fib0.show()
     var fibn: IntArray = fib0
     while (n-- > 0) {
