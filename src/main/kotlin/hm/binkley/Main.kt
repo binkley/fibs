@@ -5,24 +5,56 @@ import java.lang.System.exit
 import java.lang.System.out
 import java.util.*
 
-private val fib0: IntArray = intArrayOf(0, 1, 1, 1)
-private val ifib0: IntArray = intArrayOf(-1, 1, 1, 0)
+private class Fraction {
+    val n: Int
+    val d: Int
 
-private fun row(a: IntArray, i: Int): IntArray {
+    constructor(n: Int, d: Int) {
+        val gcd = gcd(n, d)
+        this.n = n / gcd
+        this.d = d / gcd
+    }
+
+    constructor(n: Int) : this(n, 1)
+
+    override fun toString(): String {
+        return if (1 != d) "%d/%d".format(n, d) else n.toString()
+    }
+
+    private fun gcd(p: Int, q: Int): Int {
+        return if (0 == q) p else gcd(q, p % q)
+    }
+}
+
+private operator fun Fraction.plus(that: Fraction): Fraction {
+    return Fraction(this.n * this.d + that.n * that.d, this.d * that.d)
+}
+
+private operator fun Fraction.times(that: Fraction): Fraction {
+    return Fraction(this.n * that.n, this.d * that.d)
+}
+
+private val fib0: Array<Fraction> = arrayOf(Fraction(0), Fraction(1),
+        Fraction(1), Fraction(1))
+private val ifib0: Array<Fraction> = arrayOf(Fraction(-1), Fraction(1),
+        Fraction(1), Fraction(0))
+
+private fun row(a: Array<Fraction>, i: Int): Array<Fraction> {
     val offset = 2 * i
-    return intArrayOf(a[0 + offset], a[1 + offset])
+    return arrayOf(a[0 + offset], a[1 + offset])
 }
 
-private fun col(a: IntArray, j: Int): IntArray {
-    return intArrayOf(a[0 + j], a[2 + j])
+private fun col(a: Array<Fraction>, j: Int): Array<Fraction> {
+    return arrayOf(a[0 + j], a[2 + j])
 }
 
-private infix fun IntArray.dot(that: IntArray): Int {
+private infix fun Array<Fraction>.dot(that: Array<Fraction>): Fraction {
     return this[0] * that[0] + this[1] * that[1]
 }
 
-private operator fun IntArray.times(that: IntArray): IntArray {
-    return intArrayOf(row(this, 0) dot col(that, 0),
+private operator fun Array<Fraction>.times(
+        that: Array<Fraction>): Array<Fraction> {
+    return arrayOf(row(this, 0) dot col(that, 0),
             row(this, 0) dot col(that, 1),
             row(this, 1) dot col(that, 0),
             row(this, 1) dot col(that, 1))
@@ -33,7 +65,7 @@ private fun usage() {
     exit(2)
 }
 
-private fun IntArray.show() {
+private fun Array<Fraction>.show() {
     out.println(Arrays.toString(this))
 }
 
@@ -48,8 +80,8 @@ private fun n(args: Array<String>): Int? {
 fun main(args: Array<String>) {
     var n: Int = n(args) ?: return usage()
 
-    val step : Int
-    val m : IntArray
+    val step: Int
+    val m: Array<Fraction>
     if (n < 0) {
         step = -1
         m = ifib0
@@ -59,7 +91,7 @@ fun main(args: Array<String>) {
     }
 
     fib0.show()
-    var fibn: IntArray = fib0
+    var fibn: Array<Fraction> = fib0
     while (n != 0) {
         fibn *= m
         fibn.show()
