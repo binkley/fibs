@@ -1,5 +1,4 @@
 *.iml
 /.idea/
-/.kobalt/
 /libs/ # See https://github.com/cbeust/kobalt/issues/173
 kobaltBuild/
