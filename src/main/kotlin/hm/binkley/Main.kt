@@ -6,6 +6,7 @@ import java.lang.System.out
 import java.util.*
 
 private val fib0: IntArray = intArrayOf(0, 1, 1, 1)
+private val ifib0: IntArray = intArrayOf(-1, 1, 1, 0)
 
 private fun row(a: IntArray, i: Int): IntArray {
     val offset = 2 * i
@@ -38,8 +39,7 @@ private fun IntArray.show() {
 
 private fun n(args: Array<String>): Int? {
     return if (1 == args.size) try {
-        val n = args[0].toInt()
-        if (0 > n) null else n
+        args[0].toInt()
     } catch (e: NumberFormatException) {
         null
     } else null
@@ -47,10 +47,22 @@ private fun n(args: Array<String>): Int? {
 
 fun main(args: Array<String>) {
     var n: Int = n(args) ?: return usage()
+
+    val step : Int
+    val m : IntArray
+    if (n < 0) {
+        step = -1
+        m = ifib0
+    } else {
+        step = 1
+        m = fib0
+    }
+
     fib0.show()
     var fibn: IntArray = fib0
-    while (n-- > 0) {
-        fibn *= fib0
+    while (n != 0) {
+        fibn *= m
         fibn.show()
+        n -= step
     }
 }
