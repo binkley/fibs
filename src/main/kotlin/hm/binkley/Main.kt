@@ -5,8 +5,6 @@ import java.lang.System.exit
 
 private val fib0 = Q(Fraction(0), Fraction(1),
         Fraction(1), Fraction(1))
-private val ifib0 = Q(Fraction(-1), Fraction(1),
-        Fraction(1), Fraction(0))
 
 private fun usage() {
     err.println("Usage: fibs <n>")
@@ -23,16 +21,15 @@ private fun n(args: Array<String>): Int? {
 
 fun main(args: Array<String>) {
     var n: Int = n(args) ?: return usage()
-
-    val m: Q
+    val f: (Q) -> Q
     if (n < 0) {
+        f = Q::dec
         n = -n
-        m = ifib0
     } else {
-        m = fib0
+        f = Q::inc
     }
 
-    generateSequence(fib0) { it -> it * m }.
+    generateSequence(fib0) { it -> f(it) }.
             take(n + 1).
             forEach { println(it) }
 }

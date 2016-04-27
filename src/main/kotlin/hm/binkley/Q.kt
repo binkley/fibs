@@ -15,19 +15,12 @@ class Q {
         this.d = d
     }
 
-    fun row(i: Int): File {
-        return if (0 == i) File(a, b) else File(c, d)
+    operator fun inc() : Q {
+        return Q(b, d, d, b + d)
     }
 
-    fun col(j: Int): File {
-        return if (0 == j) File(a, c) else File(b, d)
-    }
-
-    operator fun times(that: Q): Q {
-        return Q(this.row(0) dot that.col(0),
-                this.row(0) dot that.col(1),
-                this.row(1) dot that.col(0),
-                this.row(1) dot that.col(1))
+    operator fun dec() : Q {
+        return Q(b - a, a, a, b)
     }
 
     override fun toString(): String {

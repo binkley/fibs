@@ -17,8 +17,9 @@ class Fraction {
                 this.d * that.d)
     }
 
-    operator fun times(that: Fraction): Fraction {
-        return Fraction(this.n * that.n, this.d * that.d)
+    operator fun minus(that: Fraction): Fraction {
+        return Fraction(this.n * this.d - that.n * that.d,
+                this.d * that.d)
     }
 
     override fun toString(): String {
