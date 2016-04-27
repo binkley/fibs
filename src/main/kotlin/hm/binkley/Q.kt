@@ -3,6 +3,11 @@ package hm.binkley
 import java.util.*
 
 class Q {
+    companion object {
+        val fib0 = Q(Fraction(0), Fraction(1), Fraction(1), Fraction(1))
+
+    }
+
     private val a: Fraction
     private val b: Fraction
     private val c: Fraction
@@ -15,11 +20,11 @@ class Q {
         this.d = d
     }
 
-    operator fun inc() : Q {
+    operator fun inc(): Q {
         return Q(b, d, d, b + d)
     }
 
-    operator fun dec() : Q {
+    operator fun dec(): Q {
         return Q(b - a, a, a, b)
     }
 

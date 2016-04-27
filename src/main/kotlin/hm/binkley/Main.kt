@@ -3,9 +3,6 @@ package hm.binkley
 import java.lang.System.err
 import java.lang.System.exit
 
-private val fib0 = Q(Fraction(0), Fraction(1),
-        Fraction(1), Fraction(1))
-
 private fun usage() {
     err.println("Usage: fibs <n>")
     exit(2)
@@ -29,7 +26,7 @@ fun main(args: Array<String>) {
         f = Q::inc
     }
 
-    generateSequence(fib0) { it -> f(it) }.
+    generateSequence(Q.fib0) { it -> f(it) }.
             take(n + 1).
             forEach { println(it) }
 }
