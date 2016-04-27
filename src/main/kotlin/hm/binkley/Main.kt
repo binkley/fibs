@@ -2,7 +2,6 @@ package hm.binkley
 
 import java.lang.System.err
 import java.lang.System.exit
-import java.lang.System.out
 
 private val fib0 = Q(Fraction(0), Fraction(1),
         Fraction(1), Fraction(1))
@@ -25,21 +24,15 @@ private fun n(args: Array<String>): Int? {
 fun main(args: Array<String>) {
     var n: Int = n(args) ?: return usage()
 
-    val step: Int
     val m: Q
     if (n < 0) {
-        step = -1
+        n = -n
         m = ifib0
     } else {
-        step = 1
         m = fib0
     }
 
-    out.println(fib0)
-    var fibn = fib0
-    while (n != 0) {
-        fibn *= m
-        out.println(fibn)
-        n -= step
-    }
+    generateSequence(fib0) { it -> it * m }.
+            take(n + 1).
+            forEach { println(it) }
 }
