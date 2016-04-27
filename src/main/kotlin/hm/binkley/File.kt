@@ -1,13 +1,13 @@
 package hm.binkley
 
-class File {
-    private val v: Array<Fraction>
+import java.util.*
 
-    constructor(a: Fraction, b: Fraction) {
-        v = arrayOf(a, b)
+data class File(val a: Fraction, val b: Fraction) {
+    infix fun dot(that: File): Fraction {
+        return this.a * that.a + this.b * that.b
     }
 
-    infix fun dot(that: File): Fraction {
-        return this.v[0] * that.v[0] + this.v[1] * that.v[1]
+    override fun toString(): String {
+        return Arrays.toString(arrayOf(a, b))
     }
 }

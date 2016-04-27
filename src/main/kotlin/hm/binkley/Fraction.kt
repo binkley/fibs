@@ -28,4 +28,22 @@ class Fraction {
     private fun gcd(p: Int, q: Int): Int {
         return if (0 == q) p else gcd(q, p % q)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+
+        other as Fraction
+
+        if (n != other.n) return false
+        if (d != other.d) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = n
+        result += 31 * result + d
+        return result
+    }
 }
