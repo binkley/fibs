@@ -4,30 +4,30 @@ import java.util.*
 
 class Q {
     companion object {
-        val fib0 = Q(Fraction(0), Fraction(1), Fraction(1), Fraction(1))
+        val fib0 = Q(0, 1, 1, 1)
     }
 
-    private val a: Fraction
-    private val b: Fraction
-    private val c: Fraction
-    private val d: Fraction
+    private val a: Int
+    private val b: Int
+    private val c: Int
+    private val d: Int
 
-    constructor(a: Fraction, b: Fraction, c: Fraction, d: Fraction) {
+    constructor(a: Int, b: Int, c: Int, d: Int) {
         this.a = a
         this.b = b
         this.c = c
         this.d = d
     }
 
-    fun trace(): Fraction {
+    fun trace(): Int {
         return a + d;
     }
 
-    fun det(): Fraction {
+    fun det(): Int {
         return a * d + b * c
     }
 
-    operator fun get(i: Int, j: Int): Fraction {
+    operator fun get(i: Int, j: Int): Int {
         return when (i) {
             0 -> when (j) {
                 0 -> a
