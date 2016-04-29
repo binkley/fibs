@@ -5,7 +5,6 @@ import java.util.*
 class Q {
     companion object {
         val fib0 = Q(Fraction(0), Fraction(1), Fraction(1), Fraction(1))
-
     }
 
     private val a: Fraction
@@ -18,6 +17,36 @@ class Q {
         this.b = b
         this.c = c
         this.d = d
+    }
+
+    fun trace(): Fraction {
+        return a + d;
+    }
+
+    fun det(): Fraction {
+        return a * d + b * c
+    }
+
+    operator fun get(i: Int, j: Int): Fraction {
+        return when (i) {
+            0 -> when (j) {
+                0 -> a
+                1 -> b
+                else -> {
+                    throw IndexOutOfBoundsException(i.toString())
+                }
+            }
+            1 -> when (j) {
+                0 -> c
+                1 -> d
+                else -> {
+                    throw IndexOutOfBoundsException(i.toString())
+                }
+            }
+            else -> {
+                throw IndexOutOfBoundsException(i.toString())
+            }
+        }
     }
 
     operator fun inc(): Q {

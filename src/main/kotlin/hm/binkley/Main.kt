@@ -1,5 +1,6 @@
 package hm.binkley
 
+import hm.binkley.Q.Companion.fib0
 import java.lang.System.err
 import java.lang.System.exit
 
@@ -26,7 +27,7 @@ fun main(args: Array<String>) {
         f = Q::inc
     }
 
-    generateSequence(Q.fib0) { it -> f(it) }.
+    generateSequence(fib0) { it -> f(it) }.
             take(n + 1).
             forEach { println(it) }
 }

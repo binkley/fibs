@@ -12,14 +12,26 @@ class Fraction {
 
     constructor(n: Int) : this(n, 1)
 
+    operator fun get(i: Int): Int {
+        return when (i) {
+            0 -> n
+            1 -> d
+            else -> {
+                throw IndexOutOfBoundsException(i.toString())
+            }
+        }
+    }
+
     operator fun plus(that: Fraction): Fraction {
-        return Fraction(this.n * this.d + that.n * that.d,
-                this.d * that.d)
+        return Fraction(n * d + that.n * that.d, d * that.d)
     }
 
     operator fun minus(that: Fraction): Fraction {
-        return Fraction(this.n * this.d - that.n * that.d,
-                this.d * that.d)
+        return Fraction(n * d - that.n * that.d, d * that.d)
+    }
+
+    operator fun times(that: Fraction): Fraction {
+        return Fraction(n * that.n, d * that.d)
     }
 
     override fun toString(): String {
