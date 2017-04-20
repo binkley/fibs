@@ -17,6 +17,7 @@ private fun n(args: Array<String>): Int? {
     } else null
 }
 
+/** {@code main} Main entry point  */
 fun main(args: Array<String>) {
     var n = n(args) ?: return usage()
     val f: (Q) -> Q
