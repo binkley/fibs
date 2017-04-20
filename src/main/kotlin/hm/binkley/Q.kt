@@ -5,58 +5,43 @@ class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
         val fib0 = Q(0, 1, 1, 1)
     }
 
-    fun trace(): Int {
-        return a + d
-    }
+    fun trace() = a + d
 
-    fun det(): Int {
-        return a * d + b * c
-    }
+    fun det() = a * d + b * c
 
-    operator fun get(i: Int, j: Int): Int {
-        return when (i) {
-            0 -> when (j) {
-                0 -> a
-                1 -> b
-                else -> {
-                    throw IndexOutOfBoundsException(i.toString())
-                }
-            }
-            1 -> when (j) {
-                0 -> c
-                1 -> d
-                else -> {
-                    throw IndexOutOfBoundsException(i.toString())
-                }
-            }
-            else -> {
-                throw IndexOutOfBoundsException(i.toString())
-            }
+    operator fun get(i: Int, j: Int) = when (i) {
+        0 -> when (j) {
+            0 -> a
+            1 -> b
+            else -> throw IndexOutOfBoundsException(i.toString())
         }
+        1 -> when (j) {
+            0 -> c
+            1 -> d
+            else -> throw IndexOutOfBoundsException(i.toString())
+        }
+        else -> throw IndexOutOfBoundsException(i.toString())
     }
 
-    operator fun inc(): Q {
-        return Q(b, d, d, b + d)
-    }
+    operator fun inc() = Q(b, d, d, b + d)
 
-    operator fun dec(): Q {
-        return Q(b - a, a, a, b)
-    }
+    operator fun dec() = Q(b - a, a, a, b)
 
     override fun toString() = "[ $a $b\n  $c $d ]"
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other?.javaClass != javaClass) return false
-
-        other as Q
-
-        if (a != other.a) return false
-        if (b != other.b) return false
-        if (c != other.c) return false
-        if (d != other.d) return false
-
-        return true
+    override fun equals(other: Any?) = when {
+        this === other -> true
+        other?.javaClass != javaClass -> false
+        else -> {
+            other as Q
+            when {
+                a != other.a -> false
+                b != other.b -> false
+                c != other.c -> false
+                d != other.d -> false
+                else -> true
+            }
+        }
     }
 
     override fun hashCode(): Int {
