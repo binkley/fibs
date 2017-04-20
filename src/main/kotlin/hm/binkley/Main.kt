@@ -18,7 +18,7 @@ private fun n(args: Array<String>): Int? {
 }
 
 fun main(args: Array<String>) {
-    var n: Int = n(args) ?: return usage()
+    var n = n(args) ?: return usage()
     val f: (Q) -> Q
     if (n < 0) {
         f = Q::dec
@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
         f = Q::inc
     }
 
-    generateSequence(fib0) { it -> f(it) }.
+    generateSequence(fib0) { f(it) }.
             take(n + 1).
-            forEach { println(it) }
+            forEach(::println)
 }
