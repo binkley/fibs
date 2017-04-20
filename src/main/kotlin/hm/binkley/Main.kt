@@ -27,7 +27,14 @@ fun main(args: Array<String>) {
         f = Q::inc
     }
 
+    fun display(f: IndexedValue<Q>)
+            = """Fib${f.index}:
+${f.value}
+(fib${f.index}: ${f.value.a}; det: ${f.value.det()}; trace: ${f.value.trace()}"""
+
     generateSequence(fib0) { f(it) }.
             take(n + 1).
+            withIndex().
+            map(::display).
             forEach(::println)
 }

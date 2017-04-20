@@ -1,26 +1,12 @@
 package hm.binkley
 
-import java.util.*
-
-class Q {
+class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
     companion object {
         val fib0 = Q(0, 1, 1, 1)
     }
 
-    private val a: Int
-    private val b: Int
-    private val c: Int
-    private val d: Int
-
-    constructor(a: Int, b: Int, c: Int, d: Int) {
-        this.a = a
-        this.b = b
-        this.c = c
-        this.d = d
-    }
-
     fun trace(): Int {
-        return a + d;
+        return a + d
     }
 
     fun det(): Int {
@@ -57,9 +43,7 @@ class Q {
         return Q(b - a, a, a, b)
     }
 
-    override fun toString(): String {
-        return Arrays.toString(arrayOf(a, b, c, d))
-    }
+    override fun toString() = "[ $a $b\n  $c $d ]"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
