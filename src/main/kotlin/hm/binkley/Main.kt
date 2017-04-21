@@ -30,21 +30,18 @@ fun main(args: Array<String>) {
         limit = n
     }
 
-    fun display(it: IndexedValue<Q>, dir: Boolean): String {
-        val n = it.index
-        val fib = it.value
-        val sign = if (dir || 0 == n) "" else "-"
-        return """Fib($sign$n):
-$fib
-(fib($sign$n): ${fib.a}; det: ${fib.det()}; trace: ${fib.trace()})"""
+    fun display(it: Q): String {
+        val n = it.n
+        return """Fib($n):
+$it
+(fib($n): ${it.a}; det: ${it.det()}; trace: ${it.trace()})"""
     }
 
     generateSequence(fib0) { next(it) }.
             take(limit + 1).
-            withIndex().
-            map { it -> display(it, n > -1) }.
+            map(::display).
             forEach(::println)
 
-    println(display(IndexedValue(7, fib0(7)), true))
-    println(display(IndexedValue(-2, fib0(-2)), true))
+    println(display(fib0(7)))
+    println(display(fib0(-2)))
 }

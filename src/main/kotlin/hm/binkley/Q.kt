@@ -1,9 +1,10 @@
 package hm.binkley
 
-class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
+class Q private constructor(val a: Int, val b: Int, val c: Int, val d: Int,
+        val n: Int) {
     companion object {
         /** The 0th Fibonacci */
-        val fib0 = Q(0, 1, 1, 1)
+        val fib0 = Q(0, 1, 1, 1, 0)
     }
 
     operator fun invoke(n: Int): Q {
@@ -43,10 +44,10 @@ class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
     }
 
     /** Gets tne following Fibonacci. */
-    operator fun inc() = Q(b, d, d, b + d)
+    operator fun inc() = Q(b, d, d, b + d, n + 1)
 
     /** Gets the preceding Fibonacci. */
-    operator fun dec() = Q(b - a, a, a, b)
+    operator fun dec() = Q(b - a, a, a, b, n - 1)
 
     fun pow(n: Int): Q {
         throw UnsupportedOperationException()
