@@ -48,6 +48,10 @@ class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
     /** Gets the preceding Fibonacci. */
     operator fun dec() = Q(b - a, a, a, b)
 
+    fun pow(n: Int): Q {
+        throw UnsupportedOperationException()
+    }
+
     /** Primitive representation of the array */
     override fun toString() = "[ $a $b\n  $c $d ]"
 

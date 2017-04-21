@@ -20,25 +20,31 @@ private fun n(args: Array<String>): Int? {
 /** {@code main} Main entry point  */
 fun main(args: Array<String>) {
     var n = n(args) ?: return usage()
+    val limit: Int
     val next: (Q) -> Q
     if (n < 0) {
         next = Q::dec
-        n = -n
+        limit = -n
     } else {
         next = Q::inc
+        limit = n
     }
 
-    fun display(it: IndexedValue<Q>)
-            = """Fib(${it.index}):
-${it.value}
-(fib(${it.index}): ${it.value.a}; det: ${it.value.det()}; trace: ${it.value.trace()})"""
+    fun display(it: IndexedValue<Q>, dir: Boolean): String {
+        val n = it.index
+        val fib = it.value
+        val sign = if (dir || 0 == n) "" else "-"
+        return """Fib($sign$n):
+$fib
+(fib($sign$n): ${fib.a}; det: ${fib.det()}; trace: ${fib.trace()})"""
+    }
 
     generateSequence(fib0) { next(it) }.
-            take(n + 1).
+            take(limit + 1).
             withIndex().
-            map(::display).
+            map { it -> display(it, n > -1) }.
             forEach(::println)
 
-    println(display(IndexedValue(7, fib0(7))))
-    println(display(IndexedValue(-2, fib0(-2))))
+    println(display(IndexedValue(7, fib0(7)), true))
+    println(display(IndexedValue(-2, fib0(-2)), true))
 }
