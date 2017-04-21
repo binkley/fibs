@@ -6,6 +6,21 @@ class Q(val a: Int, val b: Int, val c: Int, val d: Int) {
         val fib0 = Q(0, 1, 1, 1)
     }
 
+    operator fun invoke(n: Int): Q {
+        val limit: Int
+        val next: (Q) -> Q
+        if (n < 0) {
+            next = Q::dec
+            limit = -n + 1
+        } else {
+            next = Q::inc
+            limit = n + 1
+        }
+        return generateSequence(fib0) { next(it) }.
+                take(limit).
+                last()
+    }
+
     /** The trace of Q */
     fun trace() = a + d
 
