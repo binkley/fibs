@@ -49,8 +49,17 @@ class Q private constructor(val a: Int, val b: Int, val c: Int, val d: Int,
     /** Gets the preceding Fibonacci. */
     operator fun dec() = Q(b - a, a, a, b, n - 1)
 
+    operator fun times(that: Q): Q {
+        val a = this.a * that.a + this.b * that.c
+        val b = this.a * that.b + this.b * that.d
+        val c = this.c * that.a + this.d * that.c
+        val d = this.c * that.b * this.d * that.d
+        return Q(a, b, c, d, this.n + that.n)
+    }
+
     fun pow(n: Int): Q {
-        throw UnsupportedOperationException()
+        val m = n + this.n - 1
+        return fib0(m)
     }
 
     /** Primitive representation of the array */

@@ -44,4 +44,12 @@ $it
 
     println(display(fib0(7)))
     println(display(fib0(-2)))
+
+    println(display(fib0.pow(0)))
+    println(display(fib0.pow(1)))
+    println(display(fib0.pow(2)))
+    println(display(fib0.pow(-1)))
+
+    println((fib0(0) * fib0(-1)) == fib0)
+    println(display(fib0(0) * fib0(-2)))
 }
